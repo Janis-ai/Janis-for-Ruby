@@ -2,12 +2,12 @@ require 'rubygems'
 require 'socket.io-client-simple'
 require 'httparty'
 
-module janis
+module Janis
 
     
     class Partay
         include HTTParty
-        base_uri 'https://janisapi.herokuapp.com/api/v1'
+        base_uri 'https://wordhopapi.herokuapp.com/api/v1'
     end
     
     EVENTS = [:'chat response', :'socket_id_set', :'channel update'].freeze
@@ -54,7 +54,7 @@ module janis
             @hooks ||= {}
         end
     
-        socket = SocketIO::Client::Simple.connect 'https://janis-socket-server.herokuapp.com'
+        socket = SocketIO::Client::Simple.connect 'https://wordhop-socket-server.herokuapp.com'
         
         socket.on :socket_id_set do |data|
             socket_id = data

@@ -3,24 +3,24 @@ Dotenv.load
 
 require 'facebook/messenger'
 require 'rubygems'
-require 'janis'
+require 'janis-ai'
 
 include Facebook::Messenger
 
 
-janis.token = ENV['ACCESS_TOKEN']
-janis.clientkey = ENV['JANIS_CLIENT_KEY']
-janis.apikey = ENV['JANIS_API_KEY']
-janis.platform = "messenger"
+Janis.token = ENV['ACCESS_TOKEN']
+Janis.clientkey = ENV['JANIS_CLIENT_KEY']
+Janis.apikey = ENV['JANIS_API_KEY']
+Janis.platform = "messenger"
 
-janis.on :'chat response' do |data|
+Janis.on :'chat response' do |data|
     channel = data['channel']
     text = data['text']
     payload = {'recipient': {'id': channel},'message': {'text': text}}
     Bot.deliver(payload, access_token: ENV['ACCESS_TOKEN'])
 end
 
-janis.on :'channel update' do |data|
+Janis.on :'channel update' do |data|
 end
 
 def sendIt(message, data)
@@ -29,13 +29,13 @@ def sendIt(message, data)
         message: data   
     }
     message.reply(data)
-    janis.hopOut(payload)
+    Janis.hopOut(payload)
 end
 
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
   
-  hopInResponse = janis.hopIn(message.messaging)
+  hopInResponse = Janis.hopIn(message.messaging)
   # If your bot is paused, stop it from replying
   if hopInResponse['paused'] != true
       case message.text
@@ -44,14 +44,14 @@ Bot.on :message do |message|
       when /help/i
         # let the user know that they are being routed to a human
         sendIt(message, text: 'Hang tight. Let me see what I can do.')
-        # send a janis alert to your slack channel
+        # send a Janis alert to your slack channel
         # that the user could use assistance
-        janis.assistanceRequested(message.messaging)
+        Janis.assistanceRequested(message.messaging)
       else
         # let the user know that the bot does not understand
         sendIt(message, text: 'Huh?')
         # capture conversational dead-ends.
-        janis.logUnknownIntent(message.messaging)
+        Janis.logUnknownIntent(message.messaging)
       end
     end
 end
