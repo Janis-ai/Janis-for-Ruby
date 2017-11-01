@@ -1,10 +1,11 @@
-# [janis](https://www.janis.ai) Slack Bot Ruby Example
+# [Janis](https://www.janis.ai) Slack Chatbot Ruby Example
 
-This is a simple Slack bot with janis integration example based on [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot)
+This is a simple Slack bot with a Janis integration example based on [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot) and assumes you are coding and hosting your own Chatbot.  If you want to experiment with a hosted Chatbot example, you can remix our [Glitch](https://glitch.com/edit/#!/blaze-temper) project. 
+
 
 ### Sign Up With janis
 
-You'll need an API key from janis, as well as a Client Key for each Chatbot.  You can get both of those (free) when you add [janis for Slack](https://slack.com/oauth/authorize?scope=users:read,users:read.email,commands,chat:write:bot,channels:read,channels:write,bot&client_id=23850726983.39760486257) via through a conversation with the janis bot. 
+You'll need an API key from Janis and a Client Key for your Chatbot.  You can get both of those (free) when you add [Janis for Slack](https://www.janis.ai) and start a conversation with Janis in Slack.
 
 ### Connecting Your Bot to Slack
 
