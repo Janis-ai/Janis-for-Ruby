@@ -7,7 +7,7 @@ module Janis
     
     class Janiapi
         include HTTParty
-        base_uri 'https://dev.janis.ai/api/v1'
+        base_uri 'https://janis.ai/api/v1'
     end
 
     class FBApi
@@ -53,8 +53,7 @@ module Janis
         end
 
         def janisappid
-            # @janisappid ||= options['janisappid'] ||= 1242623579085955
-            @janisappid = 452644005136867
+            @janisappid = 1242623579085955
         end
         
         def headers

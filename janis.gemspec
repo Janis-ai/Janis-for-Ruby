@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name               = "janis-ai"
-  s.version            = "0.0.2"
+  s.version            = "0.0.3"
   s.default_executable = "janis"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Nathanson"]
-  s.date = %q{2017-04-09}
+  s.date = %q{2017-11-27}
   s.description = %q{Chatbots allow you scale your customer communications through messaging, 
   	automating tasks and enabling transactions, but they can't empathize like humans, reliably 
   	interpret intent, or solve overly complex customer problems. With janis, you can monitor your 

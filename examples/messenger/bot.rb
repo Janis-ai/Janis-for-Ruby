@@ -14,7 +14,6 @@ Janis.token = ENV['ACCESS_TOKEN']
 Janis.clientkey = ENV['JANIS_CLIENT_KEY']
 Janis.apikey = ENV['JANIS_API_KEY']
 Janis.platform = "messenger"
-Janis.options = {"usewebhook":true, "janisappid":452644005136867}
 
 
 Bot.on :message do |message|
