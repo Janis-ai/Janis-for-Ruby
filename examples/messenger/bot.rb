@@ -6,7 +6,7 @@ Dotenv.load
 
 require 'facebook/messenger'
 require 'rubygems'
-require 'janis'
+require 'janis-ai'
 
 include Facebook::Messenger
 
