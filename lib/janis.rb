@@ -5,22 +5,28 @@ require 'httparty'
 module Janis
 
     
-    class Partay
+    class Janiapi
         include HTTParty
-        base_uri 'https://wordhopapi.herokuapp.com/api/v1'
+        base_uri 'https://dev.janis.ai/api/v1'
+    end
+
+    class FBApi
+        include HTTParty
+        base_uri 'https://graph.facebook.com/v2.6/me'
     end
     
     EVENTS = [:'chat response', :'socket_id_set', :'channel update'].freeze
     
     class << self
     
-        attr_accessor :apikey, :clientkey, :token, :platform
+        attr_accessor :apikey, :clientkey, :token, :platform, :options
 
         def initialize
             @apikey
             @clientkey
             @token
             @platform
+            @options
         end
         
         def new(*args, &block)
@@ -45,6 +51,11 @@ module Janis
         def platform
             @platform ||= "messenger"
         end
+
+        def janisappid
+            # @janisappid ||= options['janisappid'] ||= 1242623579085955
+            @janisappid = 452644005136867
+        end
         
         def headers
             @headers = {'apikey':apikey,'clientkey':clientkey,'platform':platform, 'token': token}
@@ -59,11 +70,11 @@ module Janis
         socket.on :socket_id_set do |data|
             socket_id = data
             x = {'socket_id': socket_id, 'clientkey': JANIS_CLIENT_KEY}
-            options = {
+            data = {
                 body: x,
                 headers: headers
             }
-            Partay.post('/update_bot_socket_id', options)
+            Janiapi.post('/update_bot_socket_id', data)
         end
 
         socket.on :'chat response' do |data|
@@ -94,28 +105,48 @@ module Janis
         end
 
         def hopIn(x)
-            puts 'hopIn'
-            options = {'body':x, 'headers':headers}
-            return Partay.post('/in', options)
+            data = {'body':x, 'headers':headers}
+            return Janiapi.post('/in', data)
         end
             
         def hopOut(x)
-            puts 'hopOut'
-            options = {'body':x, 'headers':headers}
-            return Partay.post('/out', options)
+            data = {'body':x, 'headers':headers}
+            return Janiapi.post('/out', data)
         end
             
         def logUnknownIntent(x)
-            puts 'logUnknownIntent'
-            options = {'body':x, 'headers':headers}
-            return Partay.post('/unknown', options)
+            data = {'body':x, 'headers':headers}
+            return Janiapi.post('/unknown', data)
         end
             
         def assistanceRequested(x)
-            puts 'assistanceRequested'
-            options = {'body':x, 'headers':headers}
-            return Partay.post('/human', options)
+            data = {'body':x, 'headers':headers}
+            return Janiapi.post('/human', data)
+        end
+
+        def passThreadControl(x)
+            message = x['message']
+            recipientid = x['recipient']['id']
+            appid = message['app_id']
+            is_echo = message['is_echo']
+            if message['is_echo'] && (appid == janisappid || appid.nil?)
+                
+                # If an agent responds via the Messenger Inbox, then `appId` will be null.
+                # If an agent responds from Janis on Slack, the `appId` will be 1242623579085955.
+                # In both cases, we should pause your bot by giving the thread control to Janis.
+                # Janis will pass control back to your app again after 10 minutes of inactivity.
+                # If you want to manually pass back control, use the slash command `/resume`
+                # in the Janis transcript channel, or press "Done" in the Page Inbox on the thread.
+                
+                # See: https://developers.facebook.com/docs/messenger-platform/handover-protocol#app_roles
+                # This app should be the Primary Receiver. Janis should be a Secondary Receiver.
+                # Every time an echo from either Janis or the Page Inbox is received,
+                # this app passes control over to Janis so the humans are the only ones who can respond.
+                j = {"recipient": {"id": recipientid}, "target_app_id": janisappid, "metadata": "passing thread"}
+                uri = "/pass_thread_control?access_token=" + token
+                return FBApi.post(uri, {'body':j})
+            end
+            return false
         end
     end
 end
-
