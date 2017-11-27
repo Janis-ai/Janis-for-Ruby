@@ -14,7 +14,7 @@ To connect a bot to Slack, [get a Bot API token from the Slack integrations page
 ### Installation
 
 ```bash
-$ gem install slack-ruby-bot ; gem install janis
+$ gem install slack-ruby-bot ; gem install janis-ai
 ```
 
 ### Usage
