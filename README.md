@@ -1,35 +1,34 @@
-# [janis](https://www.janis.ai) - SDK For Human + AI Conversational Experiences
-## For Bots Built in Ruby
+# [Janis](https://www.Janis.ai) - Message Management
+## For Chatbots built with Ruby
 
-Bots enable businesses to respond to customers immediately but they often fail to understand user intent.  According to Facebook, bots fail 70% of the time. janis helps solve this problem with a toolkit to easily keep humans in the loop when AI fails your customers.    The solution includes an SDK for bot developers to connect their bots to Slack, and a Slack app to get alerts, then pause and take over a bot.
+Janis helps teams train and monitor bots and fix problems fast.  [Build a bot in Ruby](./examples/) and integrate Janis with just a few lines of code to ensure delightful conversational experiences in every messaging channel.
 
-![Solution](https://cloud.githubusercontent.com/assets/7429980/22609969/491afe58-ea31-11e6-8928-27e1a1f1d6bd.png)
+##### Train
+Collaborate on what users say and your responses in a dedicated training channel. Experience exactly what your users will experience when they message you.
 
+##### Monitor
+Janis alerts you in Slack when your bot needs your help. Use our smart alerts, or create your own alerts to bring humans in the loop.
 
+##### Fix Problems Fast
+Take over for your bot and chat live to retain your users, while training your AI to learn from the conversation. Hand control back to your bot when you're done.
 
-You can integrate janis in minutes and it begins working immediately, enabling you to deliver exceptional human + AI conversational experiences.
-This module has been tested with Messenger, Slack, Skype, and Microsoft Webchat. Please see our [examples](./examples/).
-It supports bot developers working in Node, Python and Ruby.
-
-### What you can do with janis:
-You can view a full list of features at (https://www.janis.ai).  It's core purpose can be explained with this single GIF  
-
-![Takeover](https://cloud.githubusercontent.com/assets/7429980/22609935/22e39740-ea31-11e6-8286-e5a3ae545565.gif)
+To learn more about Janis' capabilities, visit [Janis.ai](https://www.janis.ai)
 
 ### What you need to get started:
-* [A Slack Account](http://www.slack.com)
-* [janis for Slack](https://slack.com/oauth/authorize?scope=users:read,users:read.email,commands,chat:write:bot,chat:write:user,channels:read,channels:history,files:write:user,channels:write,bot&client_id=23850726983.39760486257)
+* [Add Janis to your Slack team](https://www.janis.ai)
 * [A Chatbot built in Ruby](./examples/)
 
 ##### Operational Dependencies:
-1.  You'll need an API key from janis and for each Chatbot a Bot Token.  You can get both of those (free) when you add janis to Slack and through a conversation with janis. 
-2.  If you're building a Messenger Chatbot, you'll need to setup a Facebook App, Facebook Page, get the Page Access Token from Facebook and link the Facebook App to the Facebook Page for janis to work.
+1.  You'll need an API key and a Client Key for your Chatbot.  You can get both of those (free) when you add Janis to Slack. 
+2.  If you're building a Messenger Chatbot, you'll need to setup a Facebook App, Facebook Page, get the Page Access Token from Facebook and link the Facebook App to the Facebook Page for Janis to work. This is standard for any Chatbot you build for Messenger.
+3.  Janis can help you train your AI from Slack.  Currently Dialogflow, formerly known as API.AI (http://www.api.ai) is supported.
 
+Note: This module has been tested with Messenger, Slack, Skype, and Microsoft Webchat. Please see our [examples](./examples/).
 
 ### Installation
 
 ```bash
-$ gem install janis
+$ gem install janis-ai
 ```
 
 
@@ -176,5 +175,5 @@ Go back to Slack and wait for alerts. That's it!
 
 
 ### Looking for something we don't yet support?  
-* [Join our mailing list and we'll notifiy you](https://www.janis.ai/contact.html)
+* [Join our mailing list and we'll notifiy you](https://www.janis.ai)
 * [Contact Support](mailto:support@janis.ai)
